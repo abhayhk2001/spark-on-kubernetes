@@ -1,0 +1,37 @@
+apiVersion: "sparkoperator.k8s.io/v1beta2"
+kind: SparkApplication
+metadata:
+  name: pyspark-on-k8s
+  namespace: default
+spec:
+  type: Python
+  mode: cluster
+  image: "abhayhk1/spark-k8s-app:1.0"
+  pythonVersion: "3"
+  imagePullPolicy: Always
+  mainApplicationFile: local:///app/spark-s3.py
+  sparkVersion: "3.0.0"
+  restartPolicy:
+    type: Never
+  driver:
+    cores: 1
+    coreLimit: "1200m"
+    memory: "512m"
+    labels:
+      version: 3.0.0
+    serviceAccount: spark
+  executor:
+    cores: 1
+    instances: 2
+    memory: "1000m"
+    labels:
+      version: 3.0.0
+  deps:
+    jars:
+      [
+        "https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-aws/3.2.0/hadoop-aws-3.2.0.jar",
+        "https://repo1.maven.org/maven2/com/amazonaws/aws-java-sdk-bundle/1.11.375/aws-java-sdk-bundle-1.11.375.jar",
+      ]
+
+      # "https://repo1.maven.org/maven2/com/amazonaws/aws-java-sdk/1.7.4/aws-java-sdk-1.7.4.jar",
+      # "https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-aws/2.7.3/hadoop-aws-2.7.3.jar",
