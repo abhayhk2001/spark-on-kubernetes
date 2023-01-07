@@ -5,6 +5,8 @@ Spark installation provides the reuired tools to build a spark image with cousto
 
 Use following command to build base image (change 'username' with your DockerHub username after -r tag)
 ```shell
+cd $SPARK_HOME
+
 sudo bin/docker-image-tool.sh -r docker.io/username -t 3.1.1 -u 1000 -b java_image_tag=11-jre-slim -p ./kubernetes/dockerfiles/spark/bindings/python/Dockerfile build
 
 sudo docker images 

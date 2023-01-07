@@ -79,7 +79,7 @@
     cp -rfp inventory/sample inventory/mycluster
     ```
 
-11. Update Ansible inventory file with inventory builder. Include Private IPs of the VMs, and run the command.
+11. Update Ansible inventory file with inventory builder. Include Private IPs of the VMs, and run the command. // Try making it dynamic.
     ```
     declare -a IPS=(<master-node> <worker-node-1> <worker-node-2> … <worker-node-n>)
     ```
